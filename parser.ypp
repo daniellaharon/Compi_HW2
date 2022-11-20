@@ -9,10 +9,18 @@ extern int yylex();
 extern int yylineno();
 %}
 
-%token VOID INT BYTE B BOOL AND OR NOT TRUE FALSE RETURN IF ELSE WHILE BREAK CONTINUE SC
-COMMA LPAREN RPAREN LBRACE RBRACE ASSIGN RELOP BINOP ID NUM STRING
-%left
-%right
+%token VOID INT BYTE B BOOL TRUE FALSE RETURN WHILE BREAK CONTINUE SC
+COMMA LPAREN LBRACE RBRACE ID NUM STRING IF ELSE
+%right ASSIGN
+%left OR
+%left AND
+%left EQOP
+%left RELOP
+%left BINOP
+%left MULTDIVTOP
+%right NOT
+%nonassoc RPAREN
+%nonassoc ELSE
 
 %%
 Prog: Funcs                                     {printProductionRule(1);}
@@ -61,6 +69,7 @@ Type :INT                                        {printProductionRule(30);}
 ;
 Exp: LPAREN Exp RPAREN                           {printProductionRule(33);}
       | Exp BINOP Exp                            {printProductionRule(34);}
+      | Exp MULTDIVTOP Exp                       {printProductionRule(34);}
       | ID                                       {printProductionRule(35);}
       | Call                                     {printProductionRule(36);}
       | NUM                                      {printProductionRule(37);}
@@ -72,9 +81,9 @@ Exp: LPAREN Exp RPAREN                           {printProductionRule(33);}
       | Exp AND Exp                              {printProductionRule(43);}
       | Exp OR Exp                               {printProductionRule(44);}
       | Exp RELOP Exp                            {printProductionRule(45);}
+      | Exp EQOP Exp                             {printProductionRule(45);}
       | LPAREN Type RPAREN Exp                   {printProductionRule(46);}
 ;
-
 %%
 
 void yyerror(const char*) {errorSyn(yylineno); exit(1)}
