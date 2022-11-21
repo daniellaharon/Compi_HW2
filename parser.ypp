@@ -85,9 +85,7 @@ Exp: LPAREN Exp RPAREN                           {printProductionRule(33);}
       | LPAREN Type RPAREN Exp                   {printProductionRule(46);}
 ;
 %%
-
 void yyerror(const char*) {errorSyn(yylineno); exit(1);}
-
 int main() {
     return yyparse();
 }
