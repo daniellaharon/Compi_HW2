@@ -1,7 +1,7 @@
 %{
-#include "iostream"
-#include "output.hpp"
 #include "parser.tab.hpp"
+#include "output.hpp"
+#include "iostream"
 using namespace output;
 
 void yyerror(const char*);
@@ -9,8 +9,8 @@ extern int yylex();
 extern int yylineno;
 %}
 
-%token VOID INT BYTE B BOOL TRUE FALSE RETURN WHILE BREAK CONTINUE SC
-COMMA LPAREN LBRACE RBRACE ID NUM STRING IF
+%token VOID INT BYTE B BOOL TRUE FALSE RETURN IF WHILE BREAK CONTINUE SC
+COMMA LPAREN LBRACE RBRACE ID NUM STRING
 %right ASSIGN
 %left OR
 %left AND

@@ -1,6 +1,6 @@
 %{
-#include "output.hpp"
 #include "parser.tab.hpp"
+#include "output.hpp"
 using namespace output;
 %}
 
