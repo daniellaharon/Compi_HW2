@@ -6,7 +6,7 @@ using namespace output;
 
 void yyerror(const char*);
 extern int yylex();
-extern int yylineno();
+extern int yylineno;
 %}
 
 %token VOID INT BYTE B BOOL TRUE FALSE RETURN WHILE BREAK CONTINUE SC
@@ -86,8 +86,8 @@ Exp: LPAREN Exp RPAREN                           {printProductionRule(33);}
 ;
 %%
 
-void yyerror(const char*) {errorSyn(yylineno); exit(1)}
+void yyerror(const char*) {errorSyn(yylineno); exit(1);}
 
-int main(){
+int main() {
     return yyparse();
 }

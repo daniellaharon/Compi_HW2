@@ -31,13 +31,13 @@ continue                            return CONTINUE;
 \{                                  return LBRACE;
 \}                                  return RBRACE;
 =                                   return ASSIGN;
-<|>|<=|>=                           return RELOP;
+\<|\>|\<=|\>=                           return RELOP;
 ==|!=                               return EQOP;
 \+|\-                               return BINOP;
 \*|\/                               return MULTDIVTOP;
 [a-zA-Z][a-zA-Z0-9]*                return ID;
 0|[1-9][0-9]*                       return NUM;
-"([^\n\r\"\\]|\\[rnt"\\])+"         return STRING;
+\"([^\n\r\"\\]|\\[rnt"\\])+\"         return STRING;
 [\t\n\r ]|\/\/[^\r\n]*[\r|\n|\r\n]? ;
-.                                  {errorLex(yylineno}; exit(1)}
+.                                  {errorLex(yylineno); exit(1);}
 %%
