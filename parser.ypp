@@ -10,7 +10,8 @@ extern int yylineno;
 %}
 
 %token VOID INT BYTE B BOOL TRUE FALSE RETURN IF WHILE BREAK CONTINUE SC
-COMMA LPAREN LBRACE RBRACE ID NUM STRING
+COMMA ID NUM STRING
+
 %right ASSIGN
 %left OR
 %left AND
@@ -19,8 +20,8 @@ COMMA LPAREN LBRACE RBRACE ID NUM STRING
 %left BINOP
 %left MULTDIVTOP
 %right NOT
-%nonassoc RPAREN
-%nonassoc ELSE
+%left RPAREN LPAREN LBRACE RBRACE
+%right ELSE
 
 %%
 Prog: Funcs                                     {printProductionRule(1);}
